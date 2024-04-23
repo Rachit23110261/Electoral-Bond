@@ -1,0 +1,327 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+            }
+    
+            form {
+                background-color: #fff;
+                padding: 20px;
+                margin: 20px auto;
+                width: 80%;
+                max-width: 600px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+    
+            label {
+                font-weight: bold;
+                margin-bottom: 5px;
+                display: block;
+            }
+    
+            input[type="text"] {
+                padding: 8px;
+                width: calc(100% - 16px);
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+    
+            input[type="submit"] {
+                padding: 8px 20px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+    
+            input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+    
+            p {
+                margin: 5px 0;
+            }
+            table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        /* Style the table header */
+        th {
+            background-color: #000000;
+            padding: 8px;
+            border: 1px solid #ddd;
+            color: white;
+        }
+
+        /* Style the table rows */
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* Alternate row background color */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        </style>
+
+    </head>
+
+    <body>
+        <form method="post" action="/a_1">
+            <label>Search a BOND DATA by BOND NUMBER:</label>
+            <input name="box" type="text" id="movie_genre">
+            <input id="a_1" type="submit">
+        </form>
+        <table border="1">
+            <tr>
+                <th>Sr No.</th>
+                <th>Date of Encashment</th>
+                <th>Name of the Political Party</th>
+                <th>Account no. of Political Party</th>
+                <th>Prefix</th>
+                <th>Bond Number</th>
+                <th>Denominations</th>
+                <th>Pay Branch Code</th>
+                <th>Pay Teller</th>
+            </tr>
+            <tr>
+                <td>{% if a_1_data %}
+                    {{ a_1_data[0] }}
+                    {% endif %}</td>
+                <td>{% if a_1_data %}
+                    {{ a_1_data[1] }}
+                    {% endif %}</td>
+                <td>{% if a_1_data %}
+                    {{ a_1_data[2] }}
+                    {% endif %}</td>
+                <td>{% if a_1_data %}
+                    {{ a_1_data[3] }}
+                    {% endif %}</td>
+                <td>{% if a_1_data %}
+                    {{ a_1_data[4] }}
+                    {% endif %}</td>
+                <td>{% if a_1_data %}
+                    {{ a_1_data[5] }}
+                    {% endif %}</td>
+                <td>{% if a_1_data %}
+                    {{ a_1_data[6] }}
+                    {% endif %}</td>
+                <td>{% if a_1_data %}
+                    {{ a_1_data[7] }}
+                    {% endif %}</td>
+                <td>{% if a_1_data %}
+                    {{ a_1_data[8] }}
+                    {% endif %}</td>
+            </tr>
+            <!-- Add more rows here -->
+        </table>
+       
+        <br><br>
+
+        <form method="post" action="/a_2">
+            <label for="party-select">Select a filter:</label>
+            <select id="party-select" name="party-select">
+               
+                <option value="Date ofEncashment">Date of Encashment</option>
+                <option value="Name of the Political Party">Name of the Political Party</option>
+                <option value="Account no. ofPolitical Party">Account no. ofPolitical Party</option>
+                <option value="Prefix">Prefix</option>
+                <option value="Pay Branch Code">Pay Branch Code</option>
+                <option value="Pay Teller">Pay Teller</option>
+
+                <!-- Add more options for other political parties -->
+            </select>
+            <label>Search a BOND DATA by BOND NUMBER:</label>
+            <input name="box" type="text" id="movie_by_genre">
+            <input id="a_2" type="submit">
+        </form>
+        <table border="1">
+            <tr>
+                <th>Sr No.</th>
+                <th>Date of Encashment</th>
+                <th>Name of the Political Party</th>
+                <th>Account no. of Political Party</th>
+                <th>Prefix</th>
+                <th>Bond Number</th>
+                <th>Denominations</th>
+                <th>Pay Branch Code</th>
+                <th>Pay Teller</th>
+            </tr>
+            {% if a_2_data %}
+                {% for item in a_2_data %}
+                <tr>
+                    {% for i in range(9) %}
+                    <td>{{ item[i] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+        
+        
+
+        <br><br>
+
+       
+        
+
+        <br><br>
+        {% set my_list = [
+            "BHARATIYA JANATA PARTY",
+            "ALL INDIA ANNA DRAVIDA MUNNETRA KAZHAGAM",
+            "BHARAT RASHTRA SAMITHI",
+            "PRESIDENT, ALL INDIA CONGRESS COMMITTEE",
+            "SHIVSENA",
+            "TELUGU DESAM PARTY",
+            "YSR CONGRESS PARTY (YUVAJANA SRAMIKA RYTHU CONGRESS PARTY)",
+            "DRAVIDA MUNNETRA KAZHAGAM (DMK)",
+            "JANATA DAL ( SECULAR )",
+            "NATIONALIST CONGRESS PARTY MAHARASHTRA PRADESH",
+            "ALL INDIA TRINAMOOL CONGRESS",
+            "BIHAR PRADESH JANTA DAL(UNITED)",
+            "RASHTRIYA JANTA DAL",
+            "AAM AADMI PARTY",
+            "ADYAKSHA SAMAJVADI PARTY",
+            "SHIROMANI AKALI DAL",
+            "JHARKHAND MUKTI MORCHA",
+            "JAMMU AND KASHMIR NATIONAL CONFERENCE",
+            "BIJU JANATA DAL",
+            "GOA FORWARD PARTY",
+            "MAHARASHTRAWADI GOMNTAK PARTY",
+            "SIKKIM KRANTIKARI MORCHA",
+            "JANASENA PARTY",
+            "SIKKIM DEMOCRATIC FRONT"
+        ]
+         %}
+        <form method="post" action="/a_3">
+            <label for="party-select">Select a Party Name:</label>
+            <select id="party-select" name="party-select">
+                <ul>
+                    {% for item in my_list %}
+                    <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </ul>
+            </select>
+            <input id="a_3" type="submit">
+            
+
+        </form>
+        <table border="1">
+        {% if a_3_data%}
+        <th>date</th>
+                <th>total cash</th>
+        {% for item in a_3_data %}
+                
+                <tr>
+                    {% for i in range(2) %}
+                    <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+        {% endif %}
+        </table>
+        <form method="post" action="/a_4">
+            <label for="search-input">Search for a Company/Individual:</label>
+    <input type="text" id="search-input" name="search-input">
+    <input id="a_4" type="submit">
+            
+
+        </form>
+        <table border="1">
+        {% if a_4_data%}
+        <th>date</th>
+                <th>total cash</th>
+        {% for item in a_4_data %}
+                
+                <tr>
+                    {% for i in range(2) %}
+                    <td>{{ item[i] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+        {% endif %}
+        </table>
+        <form method="post" action="/a_5">
+            <label for="search-input">Search for a company which gave bond to a particular party:</label>
+    <input type="text" id="search-input" name="search-input">
+    <input id="a_5" type="submit">
+            
+
+        </form>
+        <table border="1">
+        {% if a_5_data%}
+        {% for item in a_5_data %}
+                <tr>
+                    
+                    <td>{{ item }}</td>
+                    
+                </tr>
+                {% endfor %}
+        {% endif %}
+        </table>
+        <form method="post" action="/a_6">
+            <label for="search-input">Search for a parties which gave bond to a particular company:</label>
+    <input type="text" id="search-input" name="search-input">
+    <input id="a_5" type="submit">
+            
+
+        </form>
+        <table border="1">
+        {% if a_6_data%}
+        {% for item in a_6_data %}
+                <tr>
+                    
+                    <td>{{ item }}</td>
+                    
+                </tr>
+                {% endfor %}
+        {% endif %}
+        </table>
+        <canvas id="bar-chart" width="800" height="400"></canvas>
+
+
+
+
+        <script>
+var data ;                                                                                                                                                                                                                                                                                                                                                                                                               
+
+var dates = data.map(item => item[0]);
+var totalCash = data.map(item => item[1]);
+
+var ctx = document.getElementById('bar-chart').getContext('2d');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: dates,
+        datasets: [{
+            label: 'Total Cash',
+            data: totalCash,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+        </script>
+    </body>
+
+</html>
