@@ -226,12 +226,42 @@
                 
                 <tr>
                     {% for i in range(2) %}
-                    <td>{{ item }}</td>
+                    <td>{{ item[i] }}</td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
         {% endif %}
         </table>
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <script>
+            // Get chart data from Flask and parse it
+            var chartData = JSON.parse('{{ a_3_data1 | safe }}');
+            var ctx = document.getElementById('myChart').getContext('2d');
+    
+            // Create a new chart with the retrieved data
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Total Denominations',
+                        data: chartData.values,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMin: 0, // Set the minimum value for the y-axis
+                            suggestedMax: 1000
+                        }
+                    }
+                }
+            });
+        </script>
         <form method="post" action="/a_4">
             <label for="search-input">Search for a Company/Individual:</label>
     <input type="text" id="search-input" name="search-input">
@@ -253,6 +283,36 @@
                 {% endfor %}
         {% endif %}
         </table>
+        <canvas id="myChart" width="400" height="400" style="width: 50%;height: 50vh;"></canvas>
+        <script>
+            // Get chart data from Flask and parse it
+            var chartData = JSON.parse('{{ a_4_data1 | safe }}');
+            var ctx = document.getElementById('myChart').getContext('2d');
+    
+            // Create a new chart with the retrieved data
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Total Denominations',
+                        data: chartData.values,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMin: 0, // Set the minimum value for the y-axis
+                            suggestedMax: 1000
+                        }
+                    }
+                }
+            });
+        </script>
         <form method="post" action="/a_5">
             <label for="search-input">Search for a company which gave bond to a particular party:</label>
     <input type="text" id="search-input" name="search-input">
@@ -289,7 +349,7 @@
                 {% endfor %}
         {% endif %}
         </table>
-        <canvas id="bar-chart" width="800" height="400"></canvas>
+        <canvas id="bar-chart1" width="800" height="400" style=" width: 50%;height: 50vh;"></canvas>
 
 
 
@@ -300,7 +360,7 @@ var data ;
 var dates = data.map(item => item[0]);
 var totalCash = data.map(item => item[1]);
 
-var ctx = document.getElementById('bar-chart').getContext('2d');
+var ctx = document.getElementById('bar-chart1').getContext('2d');
 new Chart(ctx, {
     type: 'bar',
     data: {
@@ -321,6 +381,38 @@ new Chart(ctx, {
         }
     }
 });
+        </script>
+        canvas id="totalDonationsChart" width="400" height="400"></canvas>
+        <script>
+            // Get chart data from Flask and parse it
+            var totalDonationsData = JSON.parse('{{ total_donations_data | safe }}');
+            var ctx = document.getElementById('totalDonationsChart').getContext('2d');
+    
+            // Create a new pie chart with the retrieved data
+            var totalDonationsChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: totalDonationsData.labels,
+                    datasets: [{
+                        label: 'Total Donations',
+                        data: totalDonationsData.values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        </script>
         </script>
     </body>
 
